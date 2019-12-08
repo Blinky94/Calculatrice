@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ConfigurationUI>
+  
+  <Calculatrice>
+    <BackgroundScreen value="#2c2c30"/>
+    <BackgroundCornerScreen Value="Red"/>
+    <BackgroundFunc value="Azure"/>
+    <LeftLabelBackground value="Transparent"/>
+    <RightLabelBackground value="Transparent"/>
+    <LeftLabelForeground value="#433dff"/>
+    <RightLabelForeground value="#339624"/>
+    <FuncControl1Background value="Azure"/>
+    <FuncControl1Foreground value="Black"/>
+    <FuncControl2Background value="LightSteelBlue"/>
+    <FuncControl2Foreground value="Black"/>
+    <FuncControl3Background value="LightSlateGray"/>
+    <FuncControl3Foreground value="Black"/>
+    <FuncButtonBorderThickness value="5"/>
+    <EcranCalculGrapheBackground value="White"/>
+    <DirectionControlTemplateShapeFill value="Azure"/>
+    <DirectionControlTemplateShapeStroke value="LightSlateGray"/>
+    <DirectionControlTemplateShapeStrokeThickness value="5"/>
+    <DirectionControlTemplateTriangleText value="▲"/>
+    <DirectionControlTemplateTriangleSize value="100"/>
+    <DirectionControlTemplateTriangleForeground value="Black"/>
+    <LeftLabelSize value="10"/>
+    <RightLabelSize value="10"/>
+    <FuncTextSize value="12"/>
+    <graphStats>
+      <LeftLabel value="graph St"/>
+      <RightLabel value="f1"/>
+      <FuncText value="f(x)"/>
+    </graphStats>
+    <defTable>
+      <LeftLabel value="déf tab"/>
+      <RightLabel value="f2"/>
+      <FuncText value="fenêtre"/>
+    </defTable>
+    <format>
+      <LeftLabel value="format"/>
+      <RightLabel value="f3"/>
+      <FuncText value="zoom"/>
+    </format>
+    <calculs>
+      <LeftLabel value="calculs"/>
+      <RightLabel value="f4"/>
+      <FuncText value="trace"/>
+    </calculs>
+    <table>
+      <LeftLabel value="table"/>
+      <RightLabel value="f5"/>
+      <FuncText value="graphe"/>
+    </table>
+    <snde>
+      <LeftLabel value=""/>
+      <RightLabel value=""/>
+      <FuncText value="2nde"/>
+    </snde>
+    <quitter>
+      <LeftLabel value="quitter"/>
+      <RightLabel value=""/>
+      <FuncText value="mode"/>
+    </quitter>
+    <inserer>
+      <LeftLabel value="insérer"/>
+      <RightLabel value=""/>
+      <FuncText value="suppr"/>
+    </inserer>
+    <alpha>
+      <LeftLabel value="verr A"/>
+      <RightLabel value=""/>
+      <FuncText value="alpha"/>
+    </alpha>
+    <echanger>
+      <LeftLabel value="échanger"/>
+      <RightLabel value=""/>
+      <FuncText value="X,T,Ɵ,n"/>
+    </echanger>
+    <listes>
+      <LeftLabel value="listes"/>
+      <RightLabel value=""/>
+      <FuncText value="stats"/>
+    </listes>
+    <math>
+      <LeftLabel value="tests"/>
+      <RightLabel value="A"/>
+      <FuncText value="math"/>
+    </math>
+    <matrice>
+      <LeftLabel value="x¯¹"/>
+      <RightLabel value="B"/>
+      <FuncText value="matrice"/>
+    </matrice>
+    <dessin>
+      <LeftLabel value="dessin"/>
+      <RightLabel value="C"/>
+      <FuncText value="prgm"/>
+    </dessin>
+    <distrib>
+      <LeftLabel value="distrib"/>
+      <RightLabel value=""/>
+      <FuncText value="var"/>
+    </distrib>
+    <annul>
+      <LeftLabel value=""/>
+      <RightLabel value=""/>
+      <FuncText value="annul"/>
+    </annul>
+    <angle>
+      <LeftLabel value="angle"/>
+      <RightLabel value="D"/>
+      <FuncText value="◄►"/>
+    </angle>
+    <trig>
+      <LeftLabel value="π"/>
+      <RightLabel value="E"/>
+      <FuncText value="trig"/>
+    </trig>
+    <resol>
+      <LeftLabel value="apps"/>
+      <RightLabel value="F"/>
+      <FuncText value="résol"/>
+    </resol>
+    <G>
+      <LeftLabel value="∫:□d□►"/>
+      <RightLabel value="G"/>
+      <FuncText value="▀∕▄"/>
+    </G>
+    <H>
+      <LeftLabel value=""/>
+      <RightLabel value="H"/>
+      <FuncText value="˄"/>
+    </H>
+    <I>
+      <LeftLabel value="√"/>
+      <RightLabel value="I"/>
+      <FuncText value="X²"/>
+    </I>
+    <N>
+      <LeftLabel value="10ⁿ"/>
+      <RightLabel value="N"/>
+      <FuncText value="log"/>
+    </N>
+    <S>
+      <LeftLabel value="eⁿ"/>
+      <RightLabel value="S"/>
+      <FuncText value="ln"/>
+    </S>
+    <X>
+      <LeftLabel value="rappel"/>
+      <RightLabel value="X"/>
+      <FuncText value="sto→"/>
+    </X>
+    <M>
+      <LeftLabel value="e"/>
+      <RightLabel value="M"/>
+      <FuncText value="÷"/>
+    </M>
+    <R>
+      <LeftLabel value="["/>
+      <RightLabel value="R"/>
+      <FuncText value="×"/>
+    </R>
+    <W>
+      <LeftLabel value="]"/>
+      <RightLabel value="W"/>
+      <FuncText value="−"/>
+    </W>
+    <mem>
+      <LeftLabel value="mém"/>
+      <RightLabel value="&quot;"/>
+      <FuncText value="+"/>
+    </mem>
+    <J>
+      <LeftLabel value="EE"/>
+      <RightLabel value="J"/>
+      <FuncText value=","/>
+    </J>
+    <K>
+      <LeftLabel value="{"/>
+      <RightLabel value="K"/>
+      <FuncText value="("/>
+    </K>
+    <L>
+      <LeftLabel value="}"/>
+      <RightLabel value="L"/>
+      <FuncText value=")"/>
+    </L>
+    <sept>
+      <LeftLabel value="un"/>
+      <RightLabel value="O"/>
+      <FuncText value="7"/>
+    </sept>
+    <huit>
+      <LeftLabel value="vn"/>
+      <RightLabel value="P"/>
+      <FuncText value="8"/>
+    </huit>
+    <neuf>
+      <LeftLabel value="wn"/>
+      <RightLabel value="Q"/>
+      <FuncText value="9"/>
+    </neuf>
+    <quatre>
+      <LeftLabel value="L4"/>
+      <RightLabel value="T"/>
+      <FuncText value="4"/>
+    </quatre>
+    <cinq>
+      <LeftLabel value="L5"/>
+      <RightLabel value="U"/>
+      <FuncText value="5"/>
+    </cinq>
+    <six>
+      <LeftLabel value="L6"/>
+      <RightLabel value="V"/>
+      <FuncText value="6"/>
+    </six>
+    <un>
+      <LeftLabel value="L1"/>
+      <RightLabel value="Y"/>
+      <FuncText value="1"/>
+    </un>
+    <deux>
+      <LeftLabel value="L2"/>
+      <RightLabel value="Z"/>
+      <FuncText value="2"/>
+    </deux>
+    <trois>
+      <LeftLabel value="L3"/>
+      <RightLabel value="ɵ"/>
+      <FuncText value="3"/>
+    </trois>
+    <zero>
+      <LeftLabel value="catalog"/>
+      <RightLabel value=""/>
+      <FuncText value="0"/>
+    </zero>
+    <point>
+      <LeftLabel value="i"/>
+      <RightLabel value=":"/>
+      <FuncText value="."/>
+    </point>
+    <rep>
+      <LeftLabel value="rép"/>
+      <RightLabel value="?"/>
+      <FuncText value="(-)"/>
+    </rep>
+    <on>
+      <LeftLabel value="off"/>
+      <RightLabel value=""/>
+      <FuncText value="on"/>
+    </on>
+    <enter>
+      <LeftLabel value="précéd"/>
+      <RightLabel value=""/>
+      <FuncText value="enter"/>
+    </enter>
+  </Calculatrice>   
+</ConfigurationUI>

@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Calculatrice.CustomControls.FunctControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Calculatrice.CustomControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="60" d:DesignWidth="100"
+             x:Name="funcControl">
+    <!--Styles-->
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <!--Labels-->
+            <Style x:Key="LeftLabel" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="{Binding Path=LeftLabelSize, ElementName=funcControl}"/>
+                <Setter Property="Height" Value="{Binding Path=FuncLabelHeight, ElementName=funcControl}"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="TextAlignment" Value="Left"/>
+                <Setter Property="Text" Value="{Binding Path=LeftLabel, ElementName=funcControl}"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="Foreground" Value="{Binding Path=LeftLabelForeground, ElementName=funcControl}"/>
+                <Setter Property="Background" Value="{Binding Path=LeftLabelBackground, ElementName=funcControl}"/>
+                <Setter Property="Margin" Value="{Binding Path=FuncLabelLeftMargin, ElementName=funcControl}"/>
+                <Setter Property="Padding" Value="10 0 0 0"/>
+            </Style>
+            <Style x:Key="RightLabel" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="{Binding Path=RightLabelSize, ElementName=funcControl}"/>
+                <Setter Property="Height" Value="{Binding Path=FuncLabelHeight, ElementName=funcControl}"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="TextAlignment" Value="Left"/>
+                <Setter Property="Text" Value="{Binding Path=RightLabel, ElementName=funcControl}"/>
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="Foreground" Value="{Binding Path=RightLabelForeground, ElementName=funcControl}"/>
+                <Setter Property="Background" Value="{Binding Path=RightLabelBackground, ElementName=funcControl}"/>
+                <Setter Property="Margin" Value="{Binding Path=FuncLabelRightMargin, ElementName=funcControl}"/>
+            </Style>
+            <!--Button-->
+            <Style x:Key="ButtonStyle" TargetType="ToggleButton">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Border x:Name="border" CornerRadius="{Binding Path=FuncButtonCornerRadius, ElementName=funcControl}" BorderThickness="{Binding Path=FuncButtonBorderThickness, ElementName=funcControl}" 
+                                    BorderBrush="DarkGray" Background="{Binding Path=FuncBackground, ElementName=funcControl}"                                     
+                                    Margin="{Binding Path=FuncButtonMargin, ElementName=funcControl}"
+                                    Height="{Binding Path=FuncHeight, ElementName=funcControl}" Width="{Binding Path=FuncWidth, ElementName=funcControl}">
+                                <ContentPresenter x:Name="borderText" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Content" 
+                                                  TextBlock.FontSize="{Binding Path=FuncTextSize, ElementName=funcControl}"
+                                                  TextBlock.Foreground="{Binding Path=FuncForeground, ElementName=funcControl}"
+                                                  TextBlock.FontFamily="{StaticResource punchlineFilled}"    
+                                                  Margin="{Binding Path=FuncTextMargin, ElementName=funcControl}"         
+                                                  TextBlock.FontWeight="Bold" Content="{Binding Path=FuncText, ElementName=funcControl}"/>
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="7" ShadowDepth="5" Color="LightGray"/>
+                                </Border.Effect>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="{Binding FuncForeground, ElementName=funcControl}"/>
+                                    <Setter TargetName="borderText" Property="Control.Foreground" Value="{Binding FuncBackground, ElementName=funcControl}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <!--Control contents-->
+    <Grid TextOptions.TextFormattingMode="Ideal">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="48"/>
+            <ColumnDefinition Width="15"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--controle gauche-->
+        <TextBlock Style="{StaticResource LeftLabel}" Name="LeftLabelText" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+        <!--controle droit-->
+        <TextBlock Style="{StaticResource RightLabel}" Name="RightLabelText" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
+        <!--bouton-->
+        <Border Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" TextOptions.TextFormattingMode="Ideal">
+            <ToggleButton Style="{StaticResource ButtonStyle}" IsChecked="{Binding Path=FuncButtonIsChecked, ElementName=funcControl}" Click="ToggleButton_Click"/>
+        </Border>
+    </Grid>
+</UserControl>
+
