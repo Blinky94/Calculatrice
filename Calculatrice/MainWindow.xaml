@@ -1845,7 +1845,8 @@
                                 <Setter Property="RightLabelSize" Value="{Binding Source={StaticResource configurationUI}, XPath=RightLabelSize/@value}" />
                                 <Setter Property="FuncBackground" Value="{StaticResource FuncControl3Background}" />
                                 <Setter Property="FuncForeground" Value="{StaticResource FuncControl3Foreground}" />
-                                <Setter Property="FuncFontFamily" Value="{StaticResource Digital}" />
+                                <Setter Property="FuncTextSize" Value="25" />
+                                <Setter Property="FuncFontFamily" Value="{StaticResource punchlineFilled}" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding ElementName=snde, Path=FuncButtonIsChecked}" Value="True">
                                         <Setter Property="FuncText" Value="{Binding Source={StaticResource configurationUI}, XPath=rep/LeftLabel/@value}" />
