@@ -4,12 +4,20 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\
+=======
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\
+>>>>>>> da0b5ef4964b45ff0a4fac06da256beed5ee9534
 Calculatrice
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 D:\WPF\Calculatrice-master\Calculatrice\App.xaml
+=======
+D:\Dev WPF\Calculatrice\Calculatrice\App.xaml
+>>>>>>> da0b5ef4964b45ff0a4fac06da256beed5ee9534
 4-1713483037
 
 8859974743
