@@ -1,0 +1,45 @@
+D:\Dev WPF\Calculatrice\Calculatrice\bin\Debug\Calculatrice.exe.config
+D:\Dev WPF\Calculatrice\Calculatrice\bin\Debug\Calculatrice.exe
+D:\Dev WPF\Calculatrice\Calculatrice\bin\Debug\Calculatrice.pdb
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\CustomControls\FunctControl.g.cs
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\MainWindow.g.cs
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\App.g.cs
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice_MarkupCompile.cache
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice_MarkupCompile.lref
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\CustomControls\FunctControl.baml
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\MainWindow.baml
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice.g.resources
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice.Properties.Resources.resources
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice.csproj.GenerateResource.cache
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice.csproj.CoreCompileInputs.cache
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice.exe
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice.pdb
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice.csprojAssemblyReference.cache
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\App.baml
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\CustomControls\DirectionalControl.g.cs
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\CustomControls\RosaryControl.g.cs
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\CustomControls\DirectionalControl.baml
+D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\CustomControls\RosaryControl.baml
+D:\WPF\Calculatrice-master\Calculatrice\bin\Debug\Calculatrice.exe.config
+D:\WPF\Calculatrice-master\Calculatrice\bin\Debug\Calculatrice.exe
+D:\WPF\Calculatrice-master\Calculatrice\bin\Debug\Calculatrice.pdb
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\Calculatrice.csprojAssemblyReference.cache
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\App.baml
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\CustomControls\DirectionalControl.g.cs
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\CustomControls\FunctControl.g.cs
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\CustomControls\RosaryControl.g.cs
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\MainWindow.g.cs
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\App.g.cs
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\Calculatrice_MarkupCompile.cache
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\Calculatrice_MarkupCompile.lref
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\CustomControls\DirectionalControl.baml
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\CustomControls\FunctControl.baml
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\CustomControls\RosaryControl.baml
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\MainWindow.baml
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\Calculatrice.g.resources
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\Calculatrice.Properties.Resources.resources
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\Calculatrice.csproj.GenerateResource.cache
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\Calculatrice.exe
+D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\Calculatrice.pdb

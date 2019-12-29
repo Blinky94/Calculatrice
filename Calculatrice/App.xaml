@@ -1,0 +1,15 @@
+﻿<Application x:Class="Calculatrice.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <FontFamily x:Key="ScriptCo">pack://application:,,,/Fonts/#SCRIPTCO</FontFamily>
+        <FontFamily x:Key="VampireWars">pack://application:,,,/Fonts/#Vampire Wars</FontFamily>
+        <FontFamily x:Key="DalmationDemo">pack://application:,,,/Fonts/#Dalmation-Demo</FontFamily>
+        <FontFamily x:Key="punchlineFilled">pack://application:,,,/Fonts/#punchline_filled</FontFamily>
+        <FontFamily x:Key="DigitalCounter7">pack://application:,,,/Fonts/#digital_counter_7</FontFamily>
+        <FontFamily x:Key="DigitalDream">pack://application:,,,/Fonts/#DIGITALDREAM</FontFamily>
+        <FontFamily x:Key="Digital">pack://application:,,,/Fonts/#digital-7</FontFamily>
+        <FontFamily x:Key="Calculator">pack://application:,,,/Fonts/#Calculator</FontFamily>
+    </Application.Resources>
+</Application>
