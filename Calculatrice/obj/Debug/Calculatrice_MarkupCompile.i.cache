@@ -4,26 +4,15 @@
 winexe
 C#
 .cs
-<<<<<<< HEAD
-D:\WPF\Calculatrice-master\Calculatrice\obj\Debug\
-=======
 D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\
->>>>>>> da0b5ef4964b45ff0a4fac06da256beed5ee9534
 Calculatrice
 none
 false
 DEBUG;TRACE
-<<<<<<< HEAD
-D:\WPF\Calculatrice-master\Calculatrice\App.xaml
-4-1713483037
-
-91464562481
-=======
 D:\Dev WPF\Calculatrice\Calculatrice\App.xaml
 4-1713483037
 
 121313244803
->>>>>>> da0b5ef4964b45ff0a4fac06da256beed5ee9534
 131569487696
 CustomControls\DirectionalControl.xaml;CustomControls\FunctControl.xaml;CustomControls\RosaryControl.xaml;MainWindow.xaml;
 
