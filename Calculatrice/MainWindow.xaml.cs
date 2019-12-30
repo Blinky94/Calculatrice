@@ -22,6 +22,7 @@ namespace Calculatrice
         private string mRegexOperators = @"(?:\+|\-|\×|\÷)";
         private string mParenthese = @"()";
         // private string mRegexParenthese = @"(?:\(|\))";
+        private bool mRacine = false;
 
         #endregion
 
@@ -41,6 +42,9 @@ namespace Calculatrice
             var lRun = new Run(pChar);
             lRun.Foreground = pColor;
 
+            if (mRacine)
+                lRun.TextDecorations = TextDecorations.OverLine;
+
             return lRun;
         }
         private Paragraph NewStylizedParagraph(ref string pText)
@@ -54,7 +58,14 @@ namespace Calculatrice
                 else if (CheckIfInSpecialChars(mOperators, lChar))
                     lParagraph.Inlines.Add(NewRunWithForegroundChanged(lChar.ToString(), Brushes.Green));
                 else
-                    lParagraph.Inlines.Add(lChar.ToString());
+                {
+                    if (lChar != '√')
+                        lParagraph.Inlines.Add(NewRunWithForegroundChanged(lChar.ToString(), Brushes.Black));
+                    else
+                        lParagraph.Inlines.Add(lChar.ToString());
+                }
+                   
+
             }
 
             return lParagraph;
@@ -106,7 +117,7 @@ namespace Calculatrice
                 // Interdire le signe - s'il n'y a pas de nombre avant
                 if (CheckIfInSpecialChars(mOperators, pChar) && lText == "0")
                     return;
-
+                
                 // Test si dernier caractere différent de ['+','-','*','/']
                 if (CheckIfInSpecialChars(mOperators, pChar) && CheckIfInSpecialChars(mOperators, lText.LastOrDefault()))
                     return;
@@ -150,6 +161,11 @@ namespace Calculatrice
                 // Interdire tout opérateurs après une parenthese ouvrante, sauf le signe '-'
                 if (CheckIfInSpecialChars("(", lText.LastOrDefault()) && (pChar != '-' && !Char.IsDigit(pChar)))
                     return;
+
+                // Interdire la racine si racine déjà présente
+                if (mRacine && pChar == '√')
+                    return;
+
             }
 
             NumericDisplay.Blocks.Clear();
@@ -423,7 +439,10 @@ namespace Calculatrice
         private void I_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
             if (snde.FuncButtonIsChecked)
+            {
                 AddToParagraph('√');
+                mRacine = true;
+            }
             else if (alpha.FuncButtonIsChecked)
                 AddToParagraph('I');
             else

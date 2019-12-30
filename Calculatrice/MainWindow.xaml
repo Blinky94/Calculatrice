@@ -54,7 +54,7 @@
                     <Border Margin="10 20 10 15" Background="{StaticResource EcranCalculGrapheBackground}">
                         <StackPanel Orientation="Horizontal">
                             <Canvas Name="Display" Width="260" Height="210" Block.LineStackingStrategy="MaxHeight">
-                                <RichTextBox Name="RichTextBoxDisplay" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, Path=Width}" Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, Path=Height}" FontFamily="{StaticResource Digital}" FontSize="24" CaretBrush="Black" IsReadOnly="True" IsReadOnlyCaretVisible="False">
+                                <RichTextBox Name="RichTextBoxDisplay" Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, Path=Width}" Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Canvas}}, Path=Height}" FontFamily="{StaticResource Digital}" FontSize="24" CaretBrush="Black" IsReadOnly="False" IsReadOnlyCaretVisible="False">
                                     <FlowDocument x:Name="NumericDisplay" IsEnabled="False" />
                                 </RichTextBox>
                                 <Border x:Name="Caret" Visibility="Visible" Canvas.Left="5" Canvas.Top="2" Width="12" Height="21" Background="Green" Opacity="0.5">
@@ -65,7 +65,7 @@
                                                     <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Background.Color" Duration="0:0:0:1" FillBehavior="HoldEnd">
                                                         <ColorAnimationUsingKeyFrames.KeyFrames>
                                                             <DiscreteColorKeyFrame KeyTime="0:0:0.750" Value="Transparent" />
-                                                            <DiscreteColorKeyFrame KeyTime="0:0:0.000" Value="Blue" />
+                                                            <DiscreteColorKeyFrame KeyTime="0:0:0.000" Value="Green" />
                                                         </ColorAnimationUsingKeyFrames.KeyFrames>
                                                     </ColorAnimationUsingKeyFrames>
                                                 </Storyboard>
