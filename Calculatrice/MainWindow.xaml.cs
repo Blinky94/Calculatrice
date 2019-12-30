@@ -100,8 +100,12 @@ namespace Calculatrice
             if (lText.Length > 0)
             {
                 // Remplace le 1er caractere si '0' par un numérique si est digit ou parenthese ouvrante ou alphabetique
-                if ((Char.IsDigit(pChar) || CheckIfInSpecialChars(mParenthese, pChar) || Char.IsLetter(pChar)) && lText == "0")
+                if ((Char.IsDigit(pChar) || CheckIfInSpecialChars(mParenthese, pChar) || Char.IsLetter(pChar) || pChar == 'π' || pChar == '√') && lText == "0")
                     lText = string.Empty;
+
+                // Interdire le signe - s'il n'y a pas de nombre avant
+                if (CheckIfInSpecialChars(mOperators, pChar) && lText == "0")
+                    return;
 
                 // Test si dernier caractere différent de ['+','-','*','/']
                 if (CheckIfInSpecialChars(mOperators, pChar) && CheckIfInSpecialChars(mOperators, lText.LastOrDefault()))
@@ -115,19 +119,27 @@ namespace Calculatrice
                 if (Char.IsDigit(lText.LastOrDefault()) && pChar == '(')
                     return;
 
+                // Interdire la parenthèse ouvrante après un point
+                if (lText.LastOrDefault() == '.' && pChar == '(')
+                    return;
+
                 // Interdire la parenthese fermante si le dernier caractere est un opérateur
                 if ((CheckIfInSpecialChars(mOperators, lText.LastOrDefault()) && pChar == ')'))
                     return;
 
+                // Interdire le point si le dernier caractere est une parenthèse fermante
+                if (lText.LastOrDefault() == ')' && pChar == '.')
+                    return;
+
                 // Interdire le point après les parentheses
-                if ((CheckIfInSpecialChars(mParenthese, lText.LastOrDefault()) && pChar == '.'))
+                if ((lText.LastOrDefault() == '(') && (CheckIfInSpecialChars(mOperators, pChar)))
                     return;
 
                 // Interdire les caracteres alphanumerics
                 if (CheckIfInSpecialChars(")", lText.LastOrDefault()) && !CheckIfInSpecialChars(mOperators, pChar))
                     return;
 
-                // Interdire la parenthèse fermante si pas de parenthese ouvrante avant
+                // Interdire la parenthèse fermante si pas de parenthese ouvrante avant, et fiabilise l'égalité du nombre de parenthèses ouvrantes et fermantes
                 if (lText.Count(x => x == '(') == lText.Count(x => x == ')') && pChar == ')')
                     return;
 

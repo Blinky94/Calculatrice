@@ -11,7 +11,6 @@ D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\MainWindow.baml
 D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice.g.resources
 D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice.Properties.Resources.resources
 D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice.csproj.GenerateResource.cache
-D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice.csproj.CoreCompileInputs.cache
 D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice.exe
 D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice.pdb
 D:\Dev WPF\Calculatrice\Calculatrice\obj\Debug\Calculatrice.csprojAssemblyReference.cache
