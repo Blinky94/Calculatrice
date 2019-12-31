@@ -1,55 +1,40 @@
-﻿<UserControl x:Class="Calculatrice.CustomControls.DirectionalControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Calculatrice.CustomControls"
-             mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="550"
-             Background="Transparent" x:Name="directionControl">
+﻿<UserControl x:Class="Calculatrice.CustomControls.DirectionalControl" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:local="clr-namespace:Calculatrice.CustomControls" mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="550" Background="Transparent" x:Name="directionControl">
     <Grid Background="Transparent">
         <Grid.Resources>
             <ControlTemplate x:Key="DirectionalButtonTemplate" TargetType="Button">
                 <Grid>
-                    <Path x:Name="TemplateShape"
-                          StrokeThickness="{Binding Path=DirectionControlTemplateShapeStrokeThickness, ElementName=directionControl}" 
-                          Stroke="{Binding Path=DirectionControlTemplateShapeStroke, ElementName=directionControl}" 
-                          Fill="{Binding Path=DirectionControlTemplateShapeFill, ElementName=directionControl}"  
-                      Data="M 10,120
+                    <Path x:Name="TemplateShape" StrokeThickness="{Binding Path=DirectionControlTemplateShapeStrokeThickness, ElementName=directionControl}" Stroke="{Binding Path=DirectionControlTemplateShapeStroke, ElementName=directionControl}" Fill="{Binding Path=DirectionControlTemplateShapeFill, ElementName=directionControl}" Data="M 10,120
                       Q 275,-75 540,120
                       L 375 280
                       Q 280,210 170,280
                       L 10,120Z">
                     </Path>
-                    <TextBlock x:Name="TriangleText" Text="{Binding Path=DirectionControlTemplateTriangleText, ElementName=directionControl}" Foreground="{Binding Path=DirectionControlTemplateTriangleForeground, ElementName=directionControl}" FontSize="{Binding Path=DirectionControlTemplateTriangleSize, ElementName=directionControl}" Margin="235 90 0 0"/>
+                    <TextBlock x:Name="TriangleText" Text="{Binding Path=DirectionControlTemplateTriangleText, ElementName=directionControl}" Foreground="{Binding Path=DirectionControlTemplateTriangleForeground, ElementName=directionControl}" FontSize="{Binding Path=DirectionControlTemplateTriangleSize, ElementName=directionControl}" Margin="235 90 0 0" />
                 </Grid>
                 <ControlTemplate.Triggers>
                     <Trigger Property="IsPressed" Value="True">
-                        <Setter Property="Fill" TargetName="TemplateShape" Value="{Binding Path=DirectionControlTemplateTriangleForeground, ElementName=directionControl}"/>
-                        <Setter Property="TextBlock.Foreground" TargetName="TriangleText" Value="{Binding Path=DirectionControlTemplateShapeFill, ElementName=directionControl}"/>
+                        <Setter Property="Fill" TargetName="TemplateShape" Value="{Binding Path=DirectionControlTemplateTriangleForeground, ElementName=directionControl}" />
+                        <Setter Property="TextBlock.Foreground" TargetName="TriangleText" Value="{Binding Path=DirectionControlTemplateShapeFill, ElementName=directionControl}" />
                     </Trigger>
                 </ControlTemplate.Triggers>
             </ControlTemplate>
-           
+
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Button x:Name="DirectionalButton" Template="{StaticResource ResourceKey=DirectionalButtonTemplate}">
+        <Button x:Name="DirectionalButton" Template="{StaticResource ResourceKey=DirectionalButtonTemplate}" Click="onDirectionalButtonClick">
             <Button.LayoutTransform>
-                <RotateTransform Angle="{Binding Path=DirectionControlRotateTransformAngle, ElementName=directionControl}"/>
+                <RotateTransform Angle="{Binding Path=DirectionControlRotateTransformAngle, ElementName=directionControl}" />
             </Button.LayoutTransform>
             <Button.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform ScaleX="{Binding Path=DirectionControlScaleTransformScaleX, ElementName=directionControl}" 
-                                    ScaleY="{Binding Path=DirectionControlScaleTransformScaleY, ElementName=directionControl}"/>
-                    <SkewTransform AngleX="{Binding Path=DirectionControlScrewTransformAngleX, ElementName=directionControl}" 
-                                   AngleY="{Binding Path=DirectionControlScrewTransformAngleY, ElementName=directionControl}"/>
-                    <TranslateTransform X="{Binding Path=DirectionControlTranslateTransformX, ElementName=directionControl}" 
-                                        Y="{Binding Path=DirectionControlTranslateTransformY, ElementName=directionControl}"/>
+                    <ScaleTransform ScaleX="{Binding Path=DirectionControlScaleTransformScaleX, ElementName=directionControl}" ScaleY="{Binding Path=DirectionControlScaleTransformScaleY, ElementName=directionControl}" />
+                    <SkewTransform AngleX="{Binding Path=DirectionControlScrewTransformAngleX, ElementName=directionControl}" AngleY="{Binding Path=DirectionControlScrewTransformAngleY, ElementName=directionControl}" />
+                    <TranslateTransform X="{Binding Path=DirectionControlTranslateTransformX, ElementName=directionControl}" Y="{Binding Path=DirectionControlTranslateTransformY, ElementName=directionControl}" />
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>

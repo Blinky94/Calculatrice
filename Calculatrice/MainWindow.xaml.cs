@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Calculatrice.CustomControls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -17,7 +18,7 @@ namespace Calculatrice
         #region Fields
 
         private List<string> mListOfFormulas = new List<string>();
-        private string mRegexLineBreak = @"(?:\r\n|\n\r|\t|\r|\n)";
+        private string mRegexRulesLineBreak = @"(?:\r\n|\n\r|\t|\r|\n)";
         private string mOperators = @"+-×÷.";
         private string mRegexOperators = @"(?:\+|\-|\×|\÷)";
         private string mParenthese = @"()";
@@ -32,40 +33,52 @@ namespace Calculatrice
             return "100";
         }
 
-        private bool CheckIfInSpecialChars(string pSpecialChars, char pChar)
+        private bool IsCurrentCharInTheList(string pSpecialChars, char pChar)
         {
             return pSpecialChars.ToCharArray().Any(x => x == pChar);
         }
 
-        private Run NewRunWithForegroundChanged(string pChar, SolidColorBrush pColor)
+        private Run StylizedNewRun(string pChar, SolidColorBrush pColor, bool pIsSqrt = false)
         {
             var lRun = new Run(pChar);
             lRun.Foreground = pColor;
 
-            if (mRacine)
-                lRun.TextDecorations = TextDecorations.OverLine;
+            if (pIsSqrt)
+            {
+                TextDecoration lOverline = new TextDecoration();
+                lOverline.Location = TextDecorationLocation.OverLine;
+                lOverline.Pen = new Pen(Brushes.Black, 1);
+                lOverline.PenThicknessUnit = TextDecorationUnit.FontRecommended;
+                TextDecorationCollection myCollection = new TextDecorationCollection();
+                lRun.TextDecorations.Add(lOverline);
+            }
 
             return lRun;
         }
-        private Paragraph NewStylizedParagraph(ref string pText)
+        private Paragraph ColorizeParagraph(ref string pText)
         {
             var lParagraph = new Paragraph();
+            bool lIsSqrt = false;
 
             foreach (var lChar in pText)
             {
-                if (CheckIfInSpecialChars(mParenthese, lChar))
-                    lParagraph.Inlines.Add(NewRunWithForegroundChanged(lChar.ToString(), Brushes.Red));
-                else if (CheckIfInSpecialChars(mOperators, lChar))
-                    lParagraph.Inlines.Add(NewRunWithForegroundChanged(lChar.ToString(), Brushes.Green));
-                else
+                if (IsCurrentCharInTheList(mParenthese, lChar))
+                    lParagraph.Inlines.Add(StylizedNewRun(lChar.ToString(), Brushes.Red, lIsSqrt));
+                else if (IsCurrentCharInTheList(mOperators, lChar))
+                    lParagraph.Inlines.Add(StylizedNewRun(lChar.ToString(), Brushes.Green, lIsSqrt));
+                else if (lChar == '√')
                 {
-                    if (lChar != '√')
-                        lParagraph.Inlines.Add(NewRunWithForegroundChanged(lChar.ToString(), Brushes.Black));
-                    else
-                        lParagraph.Inlines.Add(lChar.ToString());
+                    lParagraph.Inlines.Add(StylizedNewRun(lChar.ToString(), Brushes.Black));
+                    lIsSqrt = true;
                 }
-                   
-
+                else if (lChar == '|')
+                {
+                    lParagraph.Inlines.Add(StylizedNewRun(lChar.ToString(), Brushes.Transparent));
+                    lIsSqrt = false;
+                    mRacine = false;
+                }
+                else
+                    lParagraph.Inlines.Add(StylizedNewRun(lChar.ToString(), Brushes.Black, lIsSqrt));
             }
 
             return lParagraph;
@@ -88,7 +101,7 @@ namespace Calculatrice
 
         private void DeleteBreakLineChar(ref string pText, char pChar = default)
         {
-            pText = pChar == '1' || pChar == 'I' ? string.Join(" ", Regex.Split(pText, mRegexLineBreak)) : string.Join(string.Empty, Regex.Split(pText, mRegexLineBreak));
+            pText = pChar == '1' || pChar == 'I' ? string.Join(" ", Regex.Split(pText, mRegexRulesLineBreak)) : string.Join(string.Empty, Regex.Split(pText, mRegexRulesLineBreak));
         }
 
         /// <summary>
@@ -111,15 +124,15 @@ namespace Calculatrice
             if (lText.Length > 0)
             {
                 // Remplace le 1er caractere si '0' par un numérique si est digit ou parenthese ouvrante ou alphabetique
-                if ((Char.IsDigit(pChar) || CheckIfInSpecialChars(mParenthese, pChar) || Char.IsLetter(pChar) || pChar == 'π' || pChar == '√') && lText == "0")
+                if ((Char.IsDigit(pChar) || IsCurrentCharInTheList(mParenthese, pChar) || Char.IsLetter(pChar) || pChar == 'π' || pChar == '√') && lText == "0")
                     lText = string.Empty;
 
                 // Interdire le signe - s'il n'y a pas de nombre avant
-                if (CheckIfInSpecialChars(mOperators, pChar) && lText == "0")
+                if (IsCurrentCharInTheList(mOperators, pChar) && lText == "0")
                     return;
-                
+
                 // Test si dernier caractere différent de ['+','-','*','/']
-                if (CheckIfInSpecialChars(mOperators, pChar) && CheckIfInSpecialChars(mOperators, lText.LastOrDefault()))
+                if (IsCurrentCharInTheList(mOperators, pChar) && IsCurrentCharInTheList(mOperators, lText.LastOrDefault()))
                     return;
 
                 // Empêche le point d'être saisi 2 fois sur le même nombre
@@ -135,7 +148,7 @@ namespace Calculatrice
                     return;
 
                 // Interdire la parenthese fermante si le dernier caractere est un opérateur
-                if ((CheckIfInSpecialChars(mOperators, lText.LastOrDefault()) && pChar == ')'))
+                if ((IsCurrentCharInTheList(mOperators, lText.LastOrDefault()) && pChar == ')'))
                     return;
 
                 // Interdire le point si le dernier caractere est une parenthèse fermante
@@ -143,11 +156,11 @@ namespace Calculatrice
                     return;
 
                 // Interdire le point après les parentheses
-                if ((lText.LastOrDefault() == '(') && (CheckIfInSpecialChars(mOperators, pChar)))
+                if ((lText.LastOrDefault() == '(') && (IsCurrentCharInTheList(mOperators, pChar)))
                     return;
 
                 // Interdire les caracteres alphanumerics
-                if (CheckIfInSpecialChars(")", lText.LastOrDefault()) && !CheckIfInSpecialChars(mOperators, pChar))
+                if (IsCurrentCharInTheList(")", lText.LastOrDefault()) && !IsCurrentCharInTheList(mOperators, pChar) && pChar != '|')
                     return;
 
                 // Interdire la parenthèse fermante si pas de parenthese ouvrante avant, et fiabilise l'égalité du nombre de parenthèses ouvrantes et fermantes
@@ -155,28 +168,45 @@ namespace Calculatrice
                     return;
 
                 // Interdire la parenthèse fermante si dernier caractere est parenthese ouvrante (parentheses vides)
-                if (CheckIfInSpecialChars("(", lText.LastOrDefault()) && pChar == ')')
+                if (IsCurrentCharInTheList("(", lText.LastOrDefault()) && pChar == ')')
                     return;
 
                 // Interdire tout opérateurs après une parenthese ouvrante, sauf le signe '-'
-                if (CheckIfInSpecialChars("(", lText.LastOrDefault()) && (pChar != '-' && !Char.IsDigit(pChar)))
+                if (IsCurrentCharInTheList("(", lText.LastOrDefault()) && (pChar != '-' || !Char.IsDigit(pChar) || pChar != '√'))
                     return;
 
                 // Interdire la racine si racine déjà présente
                 if (mRacine && pChar == '√')
                     return;
 
+                // Interdire le caractere de fermeture d'une racine s'il n'y a pas de racine active
+                if (!mRacine && pChar == '|')
+                    return;
+
+                // Interdire la saisie de la racine si le caractere précédent n'est pas un opérateur
+                if (pChar == '√' && (!IsCurrentCharInTheList(mOperators, pChar) && lText.LastOrDefault() != '('))
+                    return;
+
+                // Interdire la saisie autre qu'un digit ou une parenthèse ouvrante après le caractere racine
+                if ((!Char.IsDigit(pChar) || pChar != '(') && lText.LastOrDefault() == '√')
+                    return;
+
             }
+            else
+            {
+                if (IsCurrentCharInTheList(mOperators, pChar))
+                    return;
+            }
+
 
             NumericDisplay.Blocks.Clear();
 
             lText += pChar;
 
-            NumericDisplay.Blocks.Add(NewStylizedParagraph(ref lText));
+            NumericDisplay.Blocks.Add(ColorizeParagraph(ref lText));
 
             MoveCustomCaret();
 
-            // TODO: Interdire le point si deja présent dans un nombre
             // TODO: Ajouter les autres touches saisissables
             // TODO: Switcher entre 2nde et Alpha et être capable de saisir le caractere correspondant
             // TODO: Développer la touche Entrer et afficher le résultat à droite précédé du signe égale
@@ -196,6 +226,52 @@ namespace Calculatrice
             AddToParagraph('0');
             this.NumericDisplay.LostFocus += (sender, e) => Caret.Visibility = Visibility.Collapsed;
             this.NumericDisplay.GotFocus += (sender, e) => Caret.Visibility = Visibility.Visible;
+
+            RosaryControl.OnDirectionalClicked += OnRosaryControlLeft_Click;
+            RosaryControl.OnDirectionalClicked += OnRosaryControlUp_Click;
+            RosaryControl.OnDirectionalClicked += OnRosaryControlRight_Click;
+            RosaryControl.OnDirectionalClicked += OnRosaryControlDown_Click;
+        }
+
+        private void OnRosaryControlDown_Click(object sender, OnDirectionalClickedEventArgs e)
+        {
+            var lTempSender = sender as RosaryControl;
+            var lName = e.DirectionalName;
+            if (e.DirectionalName == "DirectionalDown")
+            {
+
+            }
+        }
+
+        private void OnRosaryControlRight_Click(object sender, OnDirectionalClickedEventArgs e)
+        {
+            var lTempSender = sender as RosaryControl;
+            var lName = e.DirectionalName;
+            if (e.DirectionalName == "DirectionalRight")
+            {
+                //lTempSender.DirectionalRight.Background = Brushes.Red;
+                AddToParagraph('|');
+            }
+        }
+
+        private void OnRosaryControlUp_Click(object sender, OnDirectionalClickedEventArgs e)
+        {
+            var lTempSender = sender as RosaryControl;
+            var lName = e.DirectionalName;
+            if (e.DirectionalName == "DirectionalUp")
+            {
+
+            }
+        }
+
+        private void OnRosaryControlLeft_Click(object sender, OnDirectionalClickedEventArgs e)
+        {
+            var lTempSender = sender as RosaryControl;
+            var lName = e.DirectionalName;
+            if (e.DirectionalName == "DirectionalLeft")
+            {
+
+            }
         }
 
         #region Bouger la calculatrice
@@ -518,7 +594,7 @@ namespace Calculatrice
             }
             else
             {
-                // (-)
+                AddToParagraph('˗'); // (-)
             }
         }
 
@@ -732,7 +808,7 @@ namespace Calculatrice
                 lText = lText.Substring(0, lText.Length - 1);
 
             NumericDisplay.Blocks.Clear();
-            NumericDisplay.Blocks.Add(NewStylizedParagraph(ref lText));
+            NumericDisplay.Blocks.Add(ColorizeParagraph(ref lText));
             MoveCustomCaret();
         }
 

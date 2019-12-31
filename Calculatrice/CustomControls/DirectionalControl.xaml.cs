@@ -3,12 +3,22 @@ using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Calculatrice.CustomControls
-{
+{  
     /// <summary>
     /// Interaction logic for DirectionalControl.xaml
     /// </summary>
     public partial class DirectionalControl : UserControl
     {
+        public event RoutedEventHandler Click;
+
+        void onDirectionalButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (this.Click != null)
+            {
+                this.Click(this, e);
+            }
+        }
+
         public static readonly DependencyProperty DirectionControlTemplateShapeFillProperty = DependencyProperty.Register(
             "DirectionControlTemplateShapeFill", typeof(Brush), typeof(DirectionalControl), new PropertyMetadata(Brushes.CornflowerBlue));
         public string DirectionControlTemplateShapeFill

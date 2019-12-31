@@ -83,6 +83,7 @@
     <Compile Include="CustomControls\FunctControl.xaml.cs">
       <DependentUpon>FunctControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomControls\OnDirectionalClickedEventArgs.cs" />
     <Compile Include="CustomControls\RosaryControl.xaml.cs">
       <DependentUpon>RosaryControl.xaml</DependentUpon>
     </Compile>

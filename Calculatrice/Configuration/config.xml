@@ -142,7 +142,7 @@
       <FuncText value="log"/>
     </N>
     <S>
-      <LeftLabel value="eⁿ"/>
+      <LeftLabel value="℮ⁿ"/>
       <RightLabel value="S"/>
       <FuncText value="ln"/>
     </S>
@@ -152,7 +152,7 @@
       <FuncText value="sto→"/>
     </X>
     <M>
-      <LeftLabel value="e"/>
+      <LeftLabel value="℮"/>
       <RightLabel value="M"/>
       <FuncText value="÷"/>
     </M>

@@ -534,7 +534,7 @@
                                 </Style>
                             </StackPanel.Resources>
                             <!--Touches Directionnelles-->
-                            <controls:RosaryControl Margin="65 -25 0 0">
+                            <controls:RosaryControl x:Name="RosaryControl" Margin="65 -25 0 0">
                                 <controls:RosaryControl.BitmapEffect>
                                     <DropShadowBitmapEffect ShadowDepth="6" Color="Black" />
                                 </controls:RosaryControl.BitmapEffect>
@@ -876,7 +876,7 @@
                                 <Setter Property="LeftLabelSize" Value="{Binding Source={StaticResource configurationUI}, XPath=LeftLabelSize/@value}" />
                                 <Setter Property="RightLabelSize" Value="{Binding Source={StaticResource configurationUI}, XPath=RightLabelSize/@value}" />
                                 <Setter Property="FuncTextSize" Value="{Binding Source={StaticResource configurationUI}, XPath=FuncTextSize/@value}" />
-                                <Setter Property="FuncLabelLeftMargin" Value="-15" />
+                                <Setter Property="FuncLabelLeftMargin" Value="-5" />
                                 <Setter Property="FuncBackground" Value="{StaticResource FuncControl2Background}" />
                                 <Setter Property="FuncForeground" Value="{StaticResource FuncControl2Foreground}" />
                                 <Style.Triggers>
