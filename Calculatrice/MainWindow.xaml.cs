@@ -11,21 +11,165 @@ using System.Windows.Media;
 
 namespace Calculatrice
 {
-
     public partial class MainWindow : Window
     {
-
         #region Fields
 
-        private List<string> mListOfFormulas = new List<string>();
-        private string mRegexRulesLineBreak = @"(?:\r\n|\n\r|\t|\r|\n)";
+        private string mRegexRuleLineBreak = @"(?:\r\n|\n\r|\t|\r|\n)";
         private string mOperators = @"+-×÷.";
-        private string mRegexOperators = @"(?:\+|\-|\×|\÷)";
-        private string mParenthese = @"()";
+
+
         // private string mRegexParenthese = @"(?:\(|\))";
         private bool mRacine = false;
 
+        private string mRegexMathFunc = @"\+|\-|\×|\÷";
+        private string mRegexScience = @"\log|\ln|\X²|\sto→";
+        private string mRegexNumerics = @"[0-9]";
+        private string mRegexOpenBracket = @"\(";
+        private string mRegexCloseBracket = @"\)";
+        private string mRegexNumericDot = @"\.";
+        private string mRegexMinus = @"\-";
+        private string mRegexSquare = @"\√";
+        private string mRegexExp10N = @"\10ⁿ";
+        private string mRegexEExpN = @"\℮ⁿ";
+
+        private string mRegexRuleNumericBefore = @"(?:[0-9]|\.|\(|\)|\√|\-|\+|\-|\×|\÷";
+        private string mRegexRuleNumericAfter = @"(?:[0-9]|\.|\(|\)|\√|\-|\+|\-|\×|\÷";
+
+        //public string Fx { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string GraphStats { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string F1 { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Fenetre { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string DefTable { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string F2 { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Zoom { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Format { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string F3 { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Trace { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Calculs { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string F4 { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Graphe { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Table { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string F5 { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Snde { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Mode { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Quitter { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Suppr { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Inserer { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Alpha { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string VerrA { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string XTOn { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Echanger { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Stats { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Listes { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Math { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Tests { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _A { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Matrice { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string XExpMoins1 { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _B { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Prgm { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Dessin { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _C { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Var { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Distrib { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Annul { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Gauche_Droite { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Angle { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _D { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Trig { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Pi { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _E { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Resol { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Apps { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _F { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Carre_Divise_Carre { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _G { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Chapeau { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _H { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string X2 { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Racine { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _I { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Virgule { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string EE { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _J { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Parenthese_Ouvrante { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Accolade_Ouvrante { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _K { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Parenthese_Fermante { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Accolade_Fermante { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _L { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Diviser { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Petit_e { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _M { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Log { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string DixExpX { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _N { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        private string _sept;
+        public string _Sept { get { return _sept; } protected set { _sept = sept.FuncText; } }
+
+        //public string UDeN { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _O { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Huit { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string VDeN { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _P { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Neuf { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string WDeN { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _Q { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Multiplier { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Crochet_Ouvrant { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _R { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Ln { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string EExpX { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _S { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Quatre { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string L4 { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _T { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Cinq { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string L5 { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _U { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Six { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string L6 { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _V { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Moins { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Crochet_Fermant { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _W { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string STO { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Rappel { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _X { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Un { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string L1 { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _Y { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Deux { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string L2 { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string _Z { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Trois { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string L3 { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Teta { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string On { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Off { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Zero { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Catalog { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Espace { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Point { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Petit_i { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Deux_Point { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Moins_Numeric { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Rep { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Interrogation { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Entrer { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+        //public string Preced { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
+
         #endregion
+
+        /// <summary>
+        /// Récupère tous les symboles de toutes les touches de la calculatrice chargés depuis le xml, et attribut une variable à chacun
+        /// </summary>
+        private void GetAllSymbols()
+        {
+            
+        }
+
 
         private string Calculate()
         {
@@ -33,7 +177,7 @@ namespace Calculatrice
             return "100";
         }
 
-        private bool IsCurrentCharInTheList(string pSpecialChars, char pChar)
+        private bool IsAuthorizedChars(string pSpecialChars, char pChar)
         {
             return pSpecialChars.ToCharArray().Any(x => x == pChar);
         }
@@ -55,16 +199,16 @@ namespace Calculatrice
 
             return lRun;
         }
-        private Paragraph ColorizeParagraph(ref string pText)
+        private Paragraph ColorizeParagraph(string pFormula)
         {
             var lParagraph = new Paragraph();
             bool lIsSqrt = false;
 
-            foreach (var lChar in pText)
+            foreach (var lChar in pFormula)
             {
-                if (IsCurrentCharInTheList(mParenthese, lChar))
+                if (IsAuthorizedChars(mRegexOpenBracket + mRegexCloseBracket, lChar))
                     lParagraph.Inlines.Add(StylizedNewRun(lChar.ToString(), Brushes.Red, lIsSqrt));
-                else if (IsCurrentCharInTheList(mOperators, lChar))
+                else if (IsAuthorizedChars(mOperators, lChar))
                     lParagraph.Inlines.Add(StylizedNewRun(lChar.ToString(), Brushes.Green, lIsSqrt));
                 else if (lChar == '√')
                 {
@@ -84,7 +228,7 @@ namespace Calculatrice
             return lParagraph;
         }
 
-        private void MoveCustomCaret()
+        private void MoveCaretNext()
         {
             var lTextPointer = new TextRange(NumericDisplay.ContentStart, NumericDisplay.ContentEnd).End;
             var lRect = lTextPointer.GetCharacterRect(LogicalDirection.Forward);
@@ -99,9 +243,9 @@ namespace Calculatrice
                 Canvas.SetTop(Caret, lCaretLocationY);
         }
 
-        private void DeleteBreakLineChar(ref string pText, char pChar = default)
+        private void DeleteBreakLineChar(ref string pText, string pChar = default)
         {
-            pText = pChar == '1' || pChar == 'I' ? string.Join(" ", Regex.Split(pText, mRegexRulesLineBreak)) : string.Join(string.Empty, Regex.Split(pText, mRegexRulesLineBreak));
+            pText = pChar == "1" || pChar == "I" ? string.Join(" ", Regex.Split(pText, mRegexRuleLineBreak)) : string.Join(string.Empty, Regex.Split(pText, mRegexRuleLineBreak));
         }
 
         /// <summary>
@@ -109,7 +253,7 @@ namespace Calculatrice
         /// </summary>
         /// <param name="pChar"></param>
         /// <returns></returns>
-        private string GetFormatedTextFromDisplay(char pChar = default)
+        private string FormatDisplayToStr(string pChar = default)
         {
             var lText = new TextRange(NumericDisplay.ContentStart, NumericDisplay.ContentEnd).Text;
             DeleteBreakLineChar(ref lText, pChar);
@@ -117,95 +261,101 @@ namespace Calculatrice
             return lText;
         }
 
-        private void AddToParagraph(char pChar)
+        private void ComputeToDisplay(string pUserChar)
         {
-            string lText = GetFormatedTextFromDisplay(pChar);
+            string lCurFormula = FormatDisplayToStr(pUserChar);
 
-            if (lText.Length > 0)
-            {
-                // Remplace le 1er caractere si '0' par un numérique si est digit ou parenthese ouvrante ou alphabetique
-                if ((Char.IsDigit(pChar) || IsCurrentCharInTheList(mParenthese, pChar) || Char.IsLetter(pChar) || pChar == 'π' || pChar == '√') && lText == "0")
-                    lText = string.Empty;
+            //// Si on est au début de la saisie d'une formule
+            //if (lCurFormula == "0")
+            //{
+            //    if (!CheckAuthorizedChars("0", pUserChar))
+            //        return;
+            //}
+            //else // Dans les autres cas
+            //{
 
-                // Interdire le signe - s'il n'y a pas de nombre avant
-                if (IsCurrentCharInTheList(mOperators, pChar) && lText == "0")
-                    return;
+            //}
 
-                // Test si dernier caractere différent de ['+','-','*','/']
-                if (IsCurrentCharInTheList(mOperators, pChar) && IsCurrentCharInTheList(mOperators, lText.LastOrDefault()))
-                    return;
+            //if (lCurFormula.Length > 0)
+            //{
+            //    // Remplace le 1er caractere si '0' par un numérique si est digit ou parenthese ouvrante ou alphabetique
+            //    if ((Char.IsDigit(pUserChar) || IsAuthorizedChars(mRegexOpenBracket + mRegexCloseBracket, pUserChar) || Char.IsLetter(pUserChar) || pUserChar == 'π' || pUserChar == '√') && lCurFormula == "0")
+            //        lCurFormula = string.Empty;
 
-                // Empêche le point d'être saisi 2 fois sur le même nombre
-                if (Regex.Split(lText, mRegexOperators).LastOrDefault().Contains(".") && pChar == '.')
-                    return;
+            //    // Interdire le signe - s'il n'y a pas de nombre avant
+            //    if (IsAuthorizedChars(mOperators, pUserChar) && lCurFormula == "0")
+            //        return;
 
-                // Interdire la parenthèse ouvrante après un nombre
-                if (Char.IsDigit(lText.LastOrDefault()) && pChar == '(')
-                    return;
+            //    // Test si dernier caractere différent de ['+','-','*','/']
+            //    if (IsAuthorizedChars(mOperators, pUserChar) && IsAuthorizedChars(mOperators, lCurFormula.LastOrDefault()))
+            //        return;
 
-                // Interdire la parenthèse ouvrante après un point
-                if (lText.LastOrDefault() == '.' && pChar == '(')
-                    return;
+            //    // Empêche le point d'être saisi 2 fois sur le même nombre
+            //    if (Regex.Split(lCurFormula, mRegexMathFunc).LastOrDefault().Contains(".") && pUserChar == '.')
+            //        return;
 
-                // Interdire la parenthese fermante si le dernier caractere est un opérateur
-                if ((IsCurrentCharInTheList(mOperators, lText.LastOrDefault()) && pChar == ')'))
-                    return;
+            //    // Interdire la parenthèse ouvrante après un nombre
+            //    if (Char.IsDigit(lCurFormula.LastOrDefault()) && pUserChar == '(')
+            //        return;
 
-                // Interdire le point si le dernier caractere est une parenthèse fermante
-                if (lText.LastOrDefault() == ')' && pChar == '.')
-                    return;
+            //    // Interdire la parenthèse ouvrante après un point
+            //    if (lCurFormula.LastOrDefault() == '.' && pUserChar == '(')
+            //        return;
 
-                // Interdire le point après les parentheses
-                if ((lText.LastOrDefault() == '(') && (IsCurrentCharInTheList(mOperators, pChar)))
-                    return;
+            //    // Interdire la parenthese fermante si le dernier caractere est un opérateur
+            //    if ((IsAuthorizedChars(mOperators, lCurFormula.LastOrDefault()) && pUserChar == ')'))
+            //        return;
 
-                // Interdire les caracteres alphanumerics
-                if (IsCurrentCharInTheList(")", lText.LastOrDefault()) && !IsCurrentCharInTheList(mOperators, pChar) && pChar != '|')
-                    return;
+            //    // Interdire le point si le dernier caractere est une parenthèse fermante
+            //    if (lCurFormula.LastOrDefault() == ')' && pUserChar == '.')
+            //        return;
 
-                // Interdire la parenthèse fermante si pas de parenthese ouvrante avant, et fiabilise l'égalité du nombre de parenthèses ouvrantes et fermantes
-                if (lText.Count(x => x == '(') == lText.Count(x => x == ')') && pChar == ')')
-                    return;
+            //    // Interdire le point après les parentheses
+            //    if ((lCurFormula.LastOrDefault() == '(') && (IsAuthorizedChars(mOperators, pUserChar)))
+            //        return;
 
-                // Interdire la parenthèse fermante si dernier caractere est parenthese ouvrante (parentheses vides)
-                if (IsCurrentCharInTheList("(", lText.LastOrDefault()) && pChar == ')')
-                    return;
+            //    // Interdire les caracteres alphanumerics
+            //    if (IsAuthorizedChars(")", lCurFormula.LastOrDefault()) && !IsAuthorizedChars(mOperators, pUserChar) && pUserChar != '|')
+            //        return;
 
-                // Interdire tout opérateurs après une parenthese ouvrante, sauf le signe '-'
-                if (IsCurrentCharInTheList("(", lText.LastOrDefault()) && (pChar != '-' || !Char.IsDigit(pChar) || pChar != '√'))
-                    return;
+            //    // Interdire la parenthèse fermante si pas de parenthese ouvrante avant, et fiabilise l'égalité du nombre de parenthèses ouvrantes et fermantes
+            //    if (lCurFormula.Count(x => x == '(') == lCurFormula.Count(x => x == ')') && pUserChar == ')')
+            //        return;
 
-                // Interdire la racine si racine déjà présente
-                if (mRacine && pChar == '√')
-                    return;
+            //    // Interdire la parenthèse fermante si dernier caractere est parenthese ouvrante (parentheses vides)
+            //    if (IsAuthorizedChars("(", lCurFormula.LastOrDefault()) && pUserChar == ')')
+            //        return;
 
-                // Interdire le caractere de fermeture d'une racine s'il n'y a pas de racine active
-                if (!mRacine && pChar == '|')
-                    return;
+            //    // Interdire tout opérateurs après une parenthese ouvrante, sauf le signe '-'
+            //    if (IsAuthorizedChars("(", lCurFormula.LastOrDefault()) && (pUserChar != '-' || !Char.IsDigit(pUserChar) || pUserChar != '√'))
+            //        return;
 
-                // Interdire la saisie de la racine si le caractere précédent n'est pas un opérateur
-                if (pChar == '√' && (!IsCurrentCharInTheList(mOperators, pChar) && lText.LastOrDefault() != '('))
-                    return;
+            //    // Interdire la racine si racine déjà présente
+            //    if (mRacine && pUserChar == '√')
+            //        return;
 
-                // Interdire la saisie autre qu'un digit ou une parenthèse ouvrante après le caractere racine
-                if ((!Char.IsDigit(pChar) || pChar != '(') && lText.LastOrDefault() == '√')
-                    return;
+            //    // Interdire le caractere de fermeture d'une racine s'il n'y a pas de racine active
+            //    if (!mRacine && pUserChar == '|')
+            //        return;
 
-            }
-            else
-            {
-                if (IsCurrentCharInTheList(mOperators, pChar))
-                    return;
-            }
+            //    // Interdire la saisie de la racine si le caractere précédent n'est pas un opérateur
+            //    if (pUserChar == '√' && (!IsAuthorizedChars(mOperators, pUserChar) && lCurFormula.LastOrDefault() != '('))
+            //        return;
 
+            //    // Interdire la saisie autre qu'un digit ou une parenthèse ouvrante après le caractere racine
+            //    if ((!Char.IsDigit(pUserChar) || pUserChar != '(') && lCurFormula.LastOrDefault() == '√')
+            //        return;
 
-            NumericDisplay.Blocks.Clear();
+            //}
+            //else
+            //{
+            //    if (IsAuthorizedChars(mOperators, pUserChar))
+            //        return;
+            //}
 
-            lText += pChar;
+            InsertNewCharToDisplay(pUserChar, lCurFormula);
 
-            NumericDisplay.Blocks.Add(ColorizeParagraph(ref lText));
-
-            MoveCustomCaret();
+            MoveCaretNext();
 
             // TODO: Ajouter les autres touches saisissables
             // TODO: Switcher entre 2nde et Alpha et être capable de saisir le caractere correspondant
@@ -219,11 +369,27 @@ namespace Calculatrice
             // TODO: Pouvoir se déplacer en haut, en bas, à gauche, à droite avec les fleches directionnelles dans les formules
         }
 
+        private bool CheckAuthorizedChars(string pChar, char pUserChar)
+        {
+            // string lAuthorizedChars = GetLeft
+            return true;
+        }
+
+        private void InsertNewCharToDisplay(string pUserChar, string pCurFormula)
+        {
+            NumericDisplay.Blocks.Clear();
+            pCurFormula += pUserChar;
+            NumericDisplay.Blocks.Add(ColorizeParagraph(pCurFormula));
+        }
+
         public MainWindow()
         {
             InitializeComponent();
 
-            AddToParagraph('0');
+            // Récupère tous les symboles et fonctions de chaque touche et les chargent en mémoire
+            GetAllSymbols();
+
+            ComputeToDisplay("0");
             this.NumericDisplay.LostFocus += (sender, e) => Caret.Visibility = Visibility.Collapsed;
             this.NumericDisplay.GotFocus += (sender, e) => Caret.Visibility = Visibility.Visible;
 
@@ -250,7 +416,7 @@ namespace Calculatrice
             if (e.DirectionalName == "DirectionalRight")
             {
                 //lTempSender.DirectionalRight.Background = Brushes.Red;
-                AddToParagraph('|');
+                ComputeToDisplay("|");
             }
         }
 
@@ -309,9 +475,12 @@ namespace Calculatrice
                 // Un
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('O');
+                ComputeToDisplay("O");
             else
-                AddToParagraph('7');
+            {
+                if (_Sept != string.Empty)
+                    ComputeToDisplay(_Sept);
+            }
         }
 
         private void Huit_ToggleButtonClick(object sender, RoutedEventArgs e)
@@ -321,9 +490,9 @@ namespace Calculatrice
                 // Vn
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('P');
+                ComputeToDisplay("P");
             else
-                AddToParagraph('8');
+                ComputeToDisplay("8");
         }
 
         private void Neuf_ToggleButtonClick(object sender, RoutedEventArgs e)
@@ -333,9 +502,9 @@ namespace Calculatrice
                 // Wn
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('Q');
+                ComputeToDisplay("Q");
             else
-                AddToParagraph('9');
+                ComputeToDisplay("9");
         }
 
         private void Quatre_ToggleButtonClick(object sender, RoutedEventArgs e)
@@ -345,9 +514,9 @@ namespace Calculatrice
                 // L4
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('T');
+                ComputeToDisplay("T");
             else
-                AddToParagraph('4');
+                ComputeToDisplay("4");
         }
 
         private void Cinq_ToggleButtonClick(object sender, RoutedEventArgs e)
@@ -357,9 +526,9 @@ namespace Calculatrice
                 // L5
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('U');
+                ComputeToDisplay("U");
             else
-                AddToParagraph('5');
+                ComputeToDisplay("5");
         }
 
         private void Six_ToggleButtonClick(object sender, RoutedEventArgs e)
@@ -369,9 +538,9 @@ namespace Calculatrice
                 // L6
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('V');
+                ComputeToDisplay("V");
             else
-                AddToParagraph('6');
+                ComputeToDisplay("6");
         }
 
         private void Un_ToggleButtonClick(object sender, RoutedEventArgs e)
@@ -381,9 +550,9 @@ namespace Calculatrice
                 // L1
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('Y');
+                ComputeToDisplay("Y");
             else
-                AddToParagraph('1');
+                ComputeToDisplay("1");
         }
 
         private void Deux_ToggleButtonClick(object sender, RoutedEventArgs e)
@@ -393,9 +562,9 @@ namespace Calculatrice
                 // L2
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('Z');
+                ComputeToDisplay("Z");
             else
-                AddToParagraph('2');
+                ComputeToDisplay("2");
         }
 
         private void Trois_ToggleButtonClick(object sender, RoutedEventArgs e)
@@ -405,9 +574,9 @@ namespace Calculatrice
                 // L3
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('Θ');
+                ComputeToDisplay("Θ");
             else
-                AddToParagraph('3');
+                ComputeToDisplay("3");
         }
 
         private void Zero_ToggleButtonClick(object sender, RoutedEventArgs e)
@@ -418,10 +587,10 @@ namespace Calculatrice
             }
             else if (alpha.FuncButtonIsChecked)
             {
-                AddToParagraph(' ');
+                ComputeToDisplay(" ");
             }
             else
-                AddToParagraph('0');
+                ComputeToDisplay("0");
         }
 
         private void Point_ToggleButtonClick(object sender, RoutedEventArgs e)
@@ -431,9 +600,9 @@ namespace Calculatrice
                 // i : information
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph(':');
+                ComputeToDisplay(":");
             else
-                AddToParagraph('.');
+                ComputeToDisplay(".");
         }
 
         private void Enter_ToggleButtonClick(object sender, RoutedEventArgs e)
@@ -445,21 +614,21 @@ namespace Calculatrice
         private void Multiplier_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
             if (snde.FuncButtonIsChecked)
-                AddToParagraph('[');
+                ComputeToDisplay("[");
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('R');
+                ComputeToDisplay("R");
             else
-                AddToParagraph('×'); // #0215
+                ComputeToDisplay("×"); // #0215
         }
 
         private void Diviser_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
             if (snde.FuncButtonIsChecked)
-                AddToParagraph('e');
+                ComputeToDisplay("e");
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('M');
+                ComputeToDisplay("M");
             else
-                AddToParagraph('÷'); // #0247
+                ComputeToDisplay("÷"); // #0247
         }
 
         private void Plus_ToggleButtonClick(object sender, RoutedEventArgs e)
@@ -469,58 +638,58 @@ namespace Calculatrice
                 // mém
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('"');
+                ComputeToDisplay("\"");
             else
-                AddToParagraph('+'); // #043
+                ComputeToDisplay("+"); // #043
         }
 
         private void Moins_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
             if (snde.FuncButtonIsChecked)
-                AddToParagraph(']');
+                ComputeToDisplay("]");
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('W');
+                ComputeToDisplay("W");
             else
-                AddToParagraph('-'); // #045
+                ComputeToDisplay("-"); // #045
         }
 
         private void K_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
             if (snde.FuncButtonIsChecked)
-                AddToParagraph('{');
+                ComputeToDisplay("{");
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('K');
+                ComputeToDisplay("K");
             else
-                AddToParagraph('(');
+                ComputeToDisplay("(");
         }
 
         private void L_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
             if (snde.FuncButtonIsChecked)
-                AddToParagraph('}');
+                ComputeToDisplay("}");
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('L');
+                ComputeToDisplay("L");
             else
-                AddToParagraph(')');
+                ComputeToDisplay(")");
         }
 
         private void H_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
             if (alpha.FuncButtonIsChecked)
-                AddToParagraph('H');
+                ComputeToDisplay("H");
             else
-                AddToParagraph('^');
+                ComputeToDisplay("^");
         }
 
         private void I_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
             if (snde.FuncButtonIsChecked)
             {
-                AddToParagraph('√');
+                ComputeToDisplay("√");
                 mRacine = true;
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('I');
+                ComputeToDisplay("I");
             else
             {
                 // Calcul la racine carrée du nombre ou de l'expression saisie
@@ -534,7 +703,7 @@ namespace Calculatrice
                 // 10exp(x)
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('N');
+                ComputeToDisplay("N");
             else
             {
                 // log
@@ -548,7 +717,7 @@ namespace Calculatrice
                 // e(x)
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('S');
+                ComputeToDisplay("S");
             else
             {
                 // ln
@@ -562,7 +731,7 @@ namespace Calculatrice
                 // Rappel
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('X');
+                ComputeToDisplay("X");
             else
             {
                 // Sto-->
@@ -577,9 +746,9 @@ namespace Calculatrice
                 // EE
             }
             else if (alpha.FuncButtonIsChecked)
-                AddToParagraph('J');
+                ComputeToDisplay("J");
             else
-                AddToParagraph(',');
+                ComputeToDisplay(",");
         }
 
         private void Rep_ToggleButtonClick(object sender, RoutedEventArgs e)
@@ -594,7 +763,7 @@ namespace Calculatrice
             }
             else
             {
-                AddToParagraph('˗'); // (-)
+                ComputeToDisplay("˗"); // (-)
             }
         }
 
@@ -746,7 +915,7 @@ namespace Calculatrice
             }
             else if (alpha.FuncButtonIsChecked)
             {
-                AddToParagraph('A');
+                ComputeToDisplay("A");
             }
             else
             {
@@ -762,7 +931,7 @@ namespace Calculatrice
             }
             else if (alpha.FuncButtonIsChecked)
             {
-                AddToParagraph('B');
+                ComputeToDisplay("B");
             }
             else
             {
@@ -778,7 +947,7 @@ namespace Calculatrice
             }
             else if (alpha.FuncButtonIsChecked)
             {
-                AddToParagraph('C');
+                ComputeToDisplay("C");
             }
             else
             {
@@ -802,14 +971,14 @@ namespace Calculatrice
         {
             // annul
 
-            string lText = GetFormatedTextFromDisplay();
+            string lText = FormatDisplayToStr();
 
             if (lText.Length > 0)
                 lText = lText.Substring(0, lText.Length - 1);
 
             NumericDisplay.Blocks.Clear();
-            NumericDisplay.Blocks.Add(ColorizeParagraph(ref lText));
-            MoveCustomCaret();
+            NumericDisplay.Blocks.Add(ColorizeParagraph(lText));
+            MoveCaretNext();
         }
 
         private void Angle_ToggleButtonClick(object sender, RoutedEventArgs e)
@@ -820,7 +989,7 @@ namespace Calculatrice
             }
             else if (alpha.FuncButtonIsChecked)
             {
-                AddToParagraph('D');
+                ComputeToDisplay("D");
             }
             else
             {
@@ -832,11 +1001,11 @@ namespace Calculatrice
         {
             if (snde.FuncButtonIsChecked)
             {
-                AddToParagraph('π');
+                ComputeToDisplay("π");
             }
             else if (alpha.FuncButtonIsChecked)
             {
-                AddToParagraph('E');
+                ComputeToDisplay("E");
             }
             else
             {
@@ -852,7 +1021,7 @@ namespace Calculatrice
             }
             else if (alpha.FuncButtonIsChecked)
             {
-                AddToParagraph('F');
+                ComputeToDisplay("F");
             }
             else
             {
@@ -868,7 +1037,7 @@ namespace Calculatrice
             }
             else if (alpha.FuncButtonIsChecked)
             {
-                AddToParagraph('G');
+                ComputeToDisplay("G");
             }
             else
             {
