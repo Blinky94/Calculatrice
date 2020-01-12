@@ -20,7 +20,7 @@ namespace Calculatrice
 
 
         // private string mRegexParenthese = @"(?:\(|\))";
-        private bool mRacine = false;
+        private bool mBoolSquare = false;
 
         private string mRegexMathFunc = @"\+|\-|\×|\÷";
         private string mRegexScience = @"\log|\ln|\X²|\sto→";
@@ -106,7 +106,7 @@ namespace Calculatrice
         //public string DixExpX { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
         //public string _N { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
         private string _sept;
-        public string _Sept { get { return _sept; } protected set { _sept = sept.FuncText; } }
+        public string _Sept { get { return _sept; } protected set { _sept = Sept.FuncText; } }
 
         //public string UDeN { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
         //public string _O { get { return Fx; } protected set { Fx = graphStats.FuncText; } }
@@ -167,7 +167,7 @@ namespace Calculatrice
         /// </summary>
         private void GetAllSymbols()
         {
-            
+
         }
 
 
@@ -219,7 +219,7 @@ namespace Calculatrice
                 {
                     lParagraph.Inlines.Add(StylizedNewRun(lChar.ToString(), Brushes.Transparent));
                     lIsSqrt = false;
-                    mRacine = false;
+                    mBoolSquare = false;
                 }
                 else
                     lParagraph.Inlines.Add(StylizedNewRun(lChar.ToString(), Brushes.Black, lIsSqrt));
@@ -228,10 +228,10 @@ namespace Calculatrice
             return lParagraph;
         }
 
-        private void MoveCaretNext()
+        private void MoveCaretToDirection(LogicalDirection pDirection)
         {
             var lTextPointer = new TextRange(NumericDisplay.ContentStart, NumericDisplay.ContentEnd).End;
-            var lRect = lTextPointer.GetCharacterRect(LogicalDirection.Forward);
+            var lRect = lTextPointer.GetCharacterRect(pDirection);
 
             var lCaretLocationX = lRect.X;
             var lCaretLocationY = lRect.Y;
@@ -355,7 +355,7 @@ namespace Calculatrice
 
             InsertNewCharToDisplay(pUserChar, lCurFormula);
 
-            MoveCaretNext();
+            MoveCaretToDirection(LogicalDirection.Forward);
 
             // TODO: Ajouter les autres touches saisissables
             // TODO: Switcher entre 2nde et Alpha et être capable de saisir le caractere correspondant
@@ -405,7 +405,7 @@ namespace Calculatrice
             var lName = e.DirectionalName;
             if (e.DirectionalName == "DirectionalDown")
             {
-
+                MoveCaretToDirection(LogicalDirection.Backward);
             }
         }
 
@@ -413,10 +413,12 @@ namespace Calculatrice
         {
             var lTempSender = sender as RosaryControl;
             var lName = e.DirectionalName;
-            if (e.DirectionalName == "DirectionalRight")
+            if (e.DirectionalName == "DirectionalRight" && mBoolSquare)
             {
-                //lTempSender.DirectionalRight.Background = Brushes.Red;
-                ComputeToDisplay("|");
+                if (mBoolSquare)
+                    ComputeToDisplay("|");
+                else
+                    MoveCaretToDirection(LogicalDirection.Forward);
             }
         }
 
@@ -460,21 +462,21 @@ namespace Calculatrice
 
         private void Alpha_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            snde.FuncButtonIsChecked = false;
+            Snde.FuncButtonIsChecked = false;
         }
 
         private void Snde_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            alpha.FuncButtonIsChecked = false;
+            Alpha.FuncButtonIsChecked = false;
         }
 
         private void Sept_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // Un
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("O");
             else
             {
@@ -485,11 +487,11 @@ namespace Calculatrice
 
         private void Huit_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // Vn
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("P");
             else
                 ComputeToDisplay("8");
@@ -497,11 +499,11 @@ namespace Calculatrice
 
         private void Neuf_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // Wn
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("Q");
             else
                 ComputeToDisplay("9");
@@ -509,11 +511,11 @@ namespace Calculatrice
 
         private void Quatre_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // L4
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("T");
             else
                 ComputeToDisplay("4");
@@ -521,11 +523,11 @@ namespace Calculatrice
 
         private void Cinq_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // L5
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("U");
             else
                 ComputeToDisplay("5");
@@ -533,11 +535,11 @@ namespace Calculatrice
 
         private void Six_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // L6
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("V");
             else
                 ComputeToDisplay("6");
@@ -545,11 +547,11 @@ namespace Calculatrice
 
         private void Un_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // L1
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("Y");
             else
                 ComputeToDisplay("1");
@@ -557,11 +559,11 @@ namespace Calculatrice
 
         private void Deux_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // L2
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("Z");
             else
                 ComputeToDisplay("2");
@@ -569,11 +571,11 @@ namespace Calculatrice
 
         private void Trois_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // L3
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("Θ");
             else
                 ComputeToDisplay("3");
@@ -581,11 +583,11 @@ namespace Calculatrice
 
         private void Zero_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // catalog
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
             {
                 ComputeToDisplay(" ");
             }
@@ -595,11 +597,11 @@ namespace Calculatrice
 
         private void Point_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // i : information
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay(":");
             else
                 ComputeToDisplay(".");
@@ -613,9 +615,9 @@ namespace Calculatrice
 
         private void Multiplier_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
                 ComputeToDisplay("[");
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("R");
             else
                 ComputeToDisplay("×"); // #0215
@@ -623,9 +625,9 @@ namespace Calculatrice
 
         private void Diviser_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
                 ComputeToDisplay("e");
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("M");
             else
                 ComputeToDisplay("÷"); // #0247
@@ -633,11 +635,11 @@ namespace Calculatrice
 
         private void Plus_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // mém
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("\"");
             else
                 ComputeToDisplay("+"); // #043
@@ -645,9 +647,9 @@ namespace Calculatrice
 
         private void Moins_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
                 ComputeToDisplay("]");
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("W");
             else
                 ComputeToDisplay("-"); // #045
@@ -655,9 +657,9 @@ namespace Calculatrice
 
         private void K_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
                 ComputeToDisplay("{");
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("K");
             else
                 ComputeToDisplay("(");
@@ -665,9 +667,9 @@ namespace Calculatrice
 
         private void L_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
                 ComputeToDisplay("}");
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("L");
             else
                 ComputeToDisplay(")");
@@ -675,7 +677,7 @@ namespace Calculatrice
 
         private void H_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (alpha.FuncButtonIsChecked)
+            if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("H");
             else
                 ComputeToDisplay("^");
@@ -683,12 +685,12 @@ namespace Calculatrice
 
         private void I_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 ComputeToDisplay("√");
-                mRacine = true;
+                mBoolSquare = true;
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("I");
             else
             {
@@ -698,11 +700,11 @@ namespace Calculatrice
 
         private void Log_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // 10exp(x)
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("N");
             else
             {
@@ -712,11 +714,11 @@ namespace Calculatrice
 
         private void Ln_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // e(x)
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("S");
             else
             {
@@ -726,11 +728,11 @@ namespace Calculatrice
 
         private void Sto_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // Rappel
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("X");
             else
             {
@@ -741,11 +743,11 @@ namespace Calculatrice
 
         private void J_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // EE
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
                 ComputeToDisplay("J");
             else
                 ComputeToDisplay(",");
@@ -753,11 +755,11 @@ namespace Calculatrice
 
         private void Rep_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // rep
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
             {
                 // ?
             }
@@ -769,7 +771,7 @@ namespace Calculatrice
 
         private void On_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // off
             }
@@ -781,11 +783,11 @@ namespace Calculatrice
 
         private void GraphStats_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // graph stats
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
             {
                 // f1
             }
@@ -797,11 +799,11 @@ namespace Calculatrice
 
         private void DefTable_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // def table
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
             {
                 // f2
             }
@@ -813,11 +815,11 @@ namespace Calculatrice
 
         private void Format_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // format
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
             {
                 // f3
             }
@@ -829,11 +831,11 @@ namespace Calculatrice
 
         private void Calculs_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // calculs
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
             {
                 // f4
             }
@@ -845,11 +847,11 @@ namespace Calculatrice
 
         private void Table_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // table
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
             {
                 // f5
             }
@@ -861,7 +863,7 @@ namespace Calculatrice
 
         private void Quitter_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // quitter
             }
@@ -873,7 +875,7 @@ namespace Calculatrice
 
         private void Inserer_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // insérer
             }
@@ -885,7 +887,7 @@ namespace Calculatrice
 
         private void Echanger_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // échanger
             }
@@ -897,7 +899,7 @@ namespace Calculatrice
 
         private void Listes_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // listes
             }
@@ -909,11 +911,11 @@ namespace Calculatrice
 
         private void Math_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // tests
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
             {
                 ComputeToDisplay("A");
             }
@@ -925,11 +927,11 @@ namespace Calculatrice
 
         private void Matrice_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // x exp(-1)
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
             {
                 ComputeToDisplay("B");
             }
@@ -941,11 +943,11 @@ namespace Calculatrice
 
         private void Dessin_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // dessin
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
             {
                 ComputeToDisplay("C");
             }
@@ -957,7 +959,7 @@ namespace Calculatrice
 
         private void Distrib_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // distrib
             }
@@ -978,16 +980,16 @@ namespace Calculatrice
 
             NumericDisplay.Blocks.Clear();
             NumericDisplay.Blocks.Add(ColorizeParagraph(lText));
-            MoveCaretNext();
+            MoveCaretToDirection(LogicalDirection.Backward);
         }
 
         private void Angle_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // angle
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
             {
                 ComputeToDisplay("D");
             }
@@ -999,11 +1001,11 @@ namespace Calculatrice
 
         private void Trig_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 ComputeToDisplay("π");
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
             {
                 ComputeToDisplay("E");
             }
@@ -1015,11 +1017,11 @@ namespace Calculatrice
 
         private void Resol_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // apps
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
             {
                 ComputeToDisplay("F");
             }
@@ -1031,11 +1033,11 @@ namespace Calculatrice
 
         private void G_ToggleButtonClick(object sender, RoutedEventArgs e)
         {
-            if (snde.FuncButtonIsChecked)
+            if (Snde.FuncButtonIsChecked)
             {
                 // ∫:□d□►
             }
-            else if (alpha.FuncButtonIsChecked)
+            else if (Alpha.FuncButtonIsChecked)
             {
                 ComputeToDisplay("G");
             }

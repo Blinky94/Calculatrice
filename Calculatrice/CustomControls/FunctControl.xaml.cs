@@ -10,20 +10,20 @@ namespace Calculatrice.CustomControls
     /// </summary>
     public partial class FunctControl : UserControl
     {
-        public static readonly DependencyProperty LeftLabelProperty = DependencyProperty.Register(
-            "LeftLabel", typeof(string), typeof(FunctControl), new PropertyMetadata("undefined"));
-        public string LeftLabel
+        public static readonly DependencyProperty LeftLabelTextProperty = DependencyProperty.Register(
+            "LeftLabelText", typeof(string), typeof(FunctControl), new PropertyMetadata("undefined"));
+        public string LeftLabelText
         {
-            get { return (string)this.GetValue(LeftLabelProperty); }
-            set { this.SetValue(LeftLabelProperty, value); }
+            get { return (string)this.GetValue(LeftLabelTextProperty); }
+            set { this.SetValue(LeftLabelTextProperty, value); }
         }
 
-        public static readonly DependencyProperty RightLabelProperty = DependencyProperty.Register(
-           "RightLabel", typeof(string), typeof(FunctControl), new PropertyMetadata("undefined"));
-        public string RightLabel
+        public static readonly DependencyProperty RightLabelTextProperty = DependencyProperty.Register(
+           "RightLabelText", typeof(string), typeof(FunctControl), new PropertyMetadata("undefined"));
+        public string RightLabelText
         {
-            get { return (string)this.GetValue(RightLabelProperty); }
-            set { this.SetValue(RightLabelProperty, value); }
+            get { return (string)this.GetValue(RightLabelTextProperty); }
+            set { this.SetValue(RightLabelTextProperty, value); }
         }
 
         public static readonly DependencyProperty FuncTextProperty = DependencyProperty.Register(
